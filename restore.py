@@ -79,7 +79,7 @@ schema = schema[index]
 data={}
 data["mappings"] = schema
 data["settings"] = settings
-r = requests.put("%s/%s" % (url, index), data=data)
+r = requests.put("%s/%s" % (url, index), data=json.dumps(data))
 if r.status_code != 200:
 	print "Unable to put the index to the server (%i), aborting" % r.status_code
 	print r.content
