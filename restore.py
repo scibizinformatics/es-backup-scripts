@@ -71,7 +71,7 @@ settings_file.close()
 main_index = settings.keys()[0]
 settings = settings[main_index]
 if 'settings' in settings:
-    settings = setings["settings"]
+    settings = settings["settings"]
 
 # Read the schema
 schema_file = open("%s/schema" % index, "r")
