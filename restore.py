@@ -69,20 +69,24 @@ settings = json.loads(settings_file.read())
 settings_file.close()
 
 main_index = settings.keys()[0]
-settings = settings[main_index]["settings"]
+settings = settings[main_index]
+if 'settings' in settings:
+    settings = setings["settings"]
 
 # Read the schema
 schema_file = open("%s/schema" % index, "r")
 schema = json.loads(schema_file.read())
 schema_file.close()
 
-schema = schema[index]["mappings"]
+schema = schema[main_index]
+if 'mappings' in schema:
+    schema = schema['mappings']
 
 # Create the index on the server
 data={}
 data["mappings"] = schema
 data["settings"] = settings
-r = requests.put("%s/%s" % (url, index), data=json.dumps(data))
+r = requests.put("%s/%s" % (url, main_index), data=json.dumps(data))
 if r.status_code != 200:
 	print "Unable to put the index to the server (%i), aborting" % r.status_code
 	print r.content
