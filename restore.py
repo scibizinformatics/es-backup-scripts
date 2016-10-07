@@ -108,7 +108,7 @@ for dfile in data_files:
 	print "Putting %i items" % len(items)
 	r = requests.post("%s/_bulk" % url, data=bulk)
 	if r.status_code != 200:
-		print "Failed with code %i" % r.status_code
+		print "Failed with code %i: %s" % (r.status_code, r.reason)
 		exit(1)
 
 # Create index alias if needed
